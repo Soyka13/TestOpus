@@ -1,10 +1,8 @@
 import unittest
 from datetime import datetime
-from itertools import product
 
 from testopus.logger.logger import logger
 from testopus.test_executor.test_result import TOTestResult
-from testopus.config.config import Config
 from testopus.utils.utils import NullWriter
 
 

@@ -5,6 +5,7 @@ from datetime import datetime
 from testopus.test_executor.tests_model import TOTestsModel
 from testopus.report.report_creator import ReportCreator
 from testopus.logger.logger import logger
+from testopus.utils.utils import dir_exists
 
 
 class ReportJSONEncoder(json.JSONEncoder):
@@ -37,8 +38,8 @@ class JSONReportCreator(ReportCreator):
             current_directory = os.getcwd()
             path = current_directory + '/reports/json/'
 
-        if not os.path.exists(path):
-            os.makedirs(path)
+        if not dir_exists(path):
+            return
 
         file_name = f"Report-{datetime.now().strftime("%Y-%m-%d-%H:%M:%S")}.json"
 

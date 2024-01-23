@@ -2,6 +2,7 @@ from testopus.config.config import Config
 from testopus.report.report_type import ReportType
 from testopus.test_executor.tests_model import TOTestsModel
 from testopus.report.json_report_creator import JSONReportCreator
+from testopus.logger.logger import logger
 
 
 class TestReporter:
@@ -24,4 +25,5 @@ class TestReporter:
         self.reportCreator.display()
 
         if self.config.should_save_report:
-            self.reportCreator.save()
+            logger.info(f"Saving report at {self.config.report_path}.")
+            self.reportCreator.save(self.config.report_path)

@@ -1,9 +1,9 @@
 {
   "search_path": "/Users/olenastepaniuk/Desktop/Python/TestOpus/unit_tests/",
   "test_case_name_rules": ["*_tests.py", "test_"],
-  "unit_test_name_rule": ["test"],
+  "unit_test_name_rules": ["test"],
   "should_report": true,
   "report_format": "json",
   "should_save_report": true,
-  "report_path": "/Users/olenastepaniuk/Desktop/Python/TestOpus/reports/json/"
+  "report_path": "/Users/olenastepaniuk/Desktop/Python/TestOpus/reports/json"
 }

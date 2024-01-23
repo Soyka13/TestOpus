@@ -13,9 +13,15 @@ class TestOpusRunner:
         # Load
         loader = TestLoader(self.config)
         suit = loader.load()
+
         # Execute
+        if suit is None:
+            return
         executor = TestExecutor()
         result = executor.run(suit)
+
         # Report
+        if result is None:
+            return
         reporter = TestReporter(self.config, result)
         reporter.report()

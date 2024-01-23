@@ -1,8 +1,9 @@
 import unittest
-
 from itertools import product
+
 from testopus.config.config import Config
 from testopus.logger.logger import logger
+from testopus.utils.utils import dir_exists
 
 
 class TestLoader:
@@ -12,6 +13,9 @@ class TestLoader:
 
     def load(self):
         logger.info(f"Discovering tests at {self.config.search_path}.")
+
+        if not dir_exists(self.config.search_path):
+            return
 
         loader = unittest.TestLoader()
         suite = unittest.TestSuite()
