@@ -5,5 +5,5 @@
   "should_report": true,
   "report_format": "json",
   "should_save_report": true,
-  "report_path": "reports/json"
+  "report_path": "reports/json/"
 }
