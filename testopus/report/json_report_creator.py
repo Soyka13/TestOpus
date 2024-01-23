@@ -41,7 +41,7 @@ class JSONReportCreator(ReportCreator):
         if not dir_exists(path):
             return
 
-        file_name = f"Report-{datetime.now().strftime("%Y-%m-%d-%H:%M:%S")}.json"
+        file_name = f"Report-{datetime.now().strftime('%Y-%m-%d-%H:%M:%S')}.json"
 
         report_path = path + file_name
 
