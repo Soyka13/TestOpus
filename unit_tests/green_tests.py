@@ -7,3 +7,6 @@ class GreenTestCase(unittest.TestCase):
 
     def test_sum_tuple(self):
         self.assertEqual(sum((1, 1, 1)), 3)
+
+    def different_test(self):
+        self.assertEqual(sum((1, 1, 1)), 3)

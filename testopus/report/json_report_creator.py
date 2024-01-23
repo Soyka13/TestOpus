@@ -2,15 +2,15 @@ import json
 import os
 from datetime import datetime
 
-from testopus.report.report import Report
+from testopus.test_executor.tests_model import TOTestsModel
 from testopus.report.report_creator import ReportCreator
 from testopus.logger.logger import logger
 
 
-class ReportEncoder(json.JSONEncoder):
+class ReportJSONEncoder(json.JSONEncoder):
     def default(self, o):
-        if isinstance(o, Report):
-            return {"report_items": [
+        if isinstance(o, TOTestsModel):
+            return {"tests": [
                 {
                     "test": test.test_name,
                     "duration": test.duration,
@@ -23,11 +23,11 @@ class ReportEncoder(json.JSONEncoder):
 
 class JSONReportCreator(ReportCreator):
 
-    def __init__(self, report: Report):
-        self.report = report
+    def __init__(self, model: TOTestsModel):
+        self.model = model
 
     def get_formatted_report(self):
-        return json.dumps(self.report, cls=ReportEncoder, indent=4)
+        return json.dumps(self.model, cls=ReportJSONEncoder, indent=4)
 
     def display(self):
         logger.info(self.get_formatted_report())
@@ -46,4 +46,5 @@ class JSONReportCreator(ReportCreator):
 
         with open(report_path, 'w') as json_file:
             json_file.write(self.get_formatted_report())
+
         logger.info(f"Report saved to {report_path}")

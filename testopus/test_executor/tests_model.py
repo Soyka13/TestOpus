@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 
 @dataclass(frozen=True)
-class ReportItem:
+class TOTestItem:
     test_name: str
     duration: float
     succeeded: bool
@@ -10,5 +10,5 @@ class ReportItem:
 
 
 @dataclass(frozen=True)
-class Report:
-    tests: [ReportItem]
+class TOTestsModel:
+    tests: [TOTestItem]
