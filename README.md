@@ -1,5 +1,5 @@
 # TestOpus
-# Automated Test Execution and Reporting
+## Automated Test Execution and Reporting
 
 This script performs automated unit test discovery and execution in a specified directory, 
 providing a detailed report in JSON format.
