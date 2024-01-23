@@ -3,7 +3,7 @@ from itertools import product
 
 from testopus.config.config import Config
 from testopus.logger.logger import logger
-from testopus.utils.utils import dir_exists
+from testopus.utils.utils import dir_exists, absolute_path
 
 
 class TestLoader:
@@ -12,9 +12,11 @@ class TestLoader:
         self.config = config
 
     def load(self):
-        logger.info(f"Discovering tests at {self.config.search_path}.")
+        full_search_path = absolute_path(self.config.search_path)
 
-        if not dir_exists(self.config.search_path):
+        logger.info(f"Discovering tests at {full_search_path}.")
+
+        if not dir_exists(full_search_path):
             return
 
         loader = unittest.TestLoader()
@@ -23,7 +25,7 @@ class TestLoader:
         for test_case_rule, unit_test_rule \
                 in product(self.config.test_case_name_rules, self.config.unit_test_name_rules):
             loader.testMethodPrefix = unit_test_rule
-            tests = loader.discover(self.config.search_path, pattern=test_case_rule)
+            tests = loader.discover(full_search_path, pattern=test_case_rule)
             suite.addTests(tests)
 
         number_of_test_cases = suite.countTestCases()

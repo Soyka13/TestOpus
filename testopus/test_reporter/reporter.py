@@ -25,5 +25,4 @@ class TestReporter:
         self.reportCreator.display()
 
         if self.config.should_save_report:
-            logger.info(f"Saving report at {self.config.report_path}.")
             self.reportCreator.save(self.config.report_path)
