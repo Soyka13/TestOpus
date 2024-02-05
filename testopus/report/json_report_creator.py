@@ -16,6 +16,7 @@ class ReportJSONEncoder(json.JSONEncoder):
                     "test": test.test_name,
                     "duration": test.duration,
                     "succeeded": test.succeeded,
+                    "skipped": test.skipped,
                     "error": test.error
                 } for test in o.tests
             ]}

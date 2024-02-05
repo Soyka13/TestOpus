@@ -6,6 +6,7 @@ class TOTestItem:
     test_name: str
     duration: float
     succeeded: bool
+    skipped: bool
     error: str
 
 
