@@ -12,6 +12,10 @@ class RedTestCase(unittest.TestCase):
     def test_skipped(self):
         raise Exception("This test should be skipped.")
 
+    @unittest.expectedFailure
+    def test_expected_failure(self):
+        raise Exception("This test is expected to fail.")
+
 
 if __name__ == '__main__':
     unittest.main()

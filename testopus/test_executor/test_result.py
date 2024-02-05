@@ -31,6 +31,12 @@ class TOTestResult(unittest.TextTestResult):
     def addSkip(self, test, reason):
         super().addSkip(test, reason)
         self._add_test_item(test, succeeded=False, skipped=True)
+        
+    def addExpectedFailure(self, test, err):
+        super().addExpectedFailure(test, err)
+        exception_type, exception_instance, _ = err
+        error_string = f"{exception_type.__name__}: {exception_instance}"
+        self._add_test_item(test, succeeded=False, is_failure_expected=True, error=error_string)
 
     def printErrors(self):
         return
@@ -41,8 +47,8 @@ class TOTestResult(unittest.TextTestResult):
     def get_tests_model(self):
         return TOTestsModel(self.test_models)
 
-    def _add_test_item(self, test, succeeded, skipped=False, error=None):
+    def _add_test_item(self, test, succeeded, skipped=False, is_failure_expected=False, error=None):
         duration = time.time() - self.start_time
         test_name = self.getDescription(test)
-        test_item = TOTestItem(test_name, duration, succeeded, skipped, error or "")
+        test_item = TOTestItem(test_name, duration, succeeded, skipped, is_failure_expected, error or "")
         self.test_models.append(test_item)
