@@ -5,7 +5,8 @@ from testopus.loader.module_loader import ModuleLoader
 from testopus.logger.logger import logger
 from testopus.loader.test_case_model import TOTestCase, TOTest
 from testopus.executor.test_result import TOTestResultHandler
-from testopus.utils.decorators import SkipException, FailureExpectedException
+from testopus.utils.skip_decorator import SkipException
+from testopus.utils.failure_expected_decorator import FailureExpectedException
 
 
 class TestExecutor:

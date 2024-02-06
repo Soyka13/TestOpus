@@ -1,4 +1,5 @@
-from testopus.utils.decorators import skip, failure_expected
+from testopus.utils.skip_decorator import skip
+from testopus.utils.failure_expected_decorator import failure_expected
 
 
 class RedTestCase:
