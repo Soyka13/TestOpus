@@ -1,9 +1,9 @@
-import os
+from pathlib import Path
 from testopus.logger.logger import logger
 
 
-def dir_exists(path):
-    exists = os.path.exists(path) and os.path.isdir(path)
+def dir_exists(path: Path):
+    exists = path.exists() and path.is_dir()
 
     if exists:
         logger.info(f"The directory '{path}' exists.")
@@ -11,11 +11,3 @@ def dir_exists(path):
         logger.error(f"The directory '{path}' does not exist. Aborting...")
 
     return exists
-
-
-def absolute_path(raw_path):
-    if os.path.isabs(raw_path):
-        # Path is absolute
-        return raw_path
-    else:
-        return os.getcwd() + '/' + raw_path
