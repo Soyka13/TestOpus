@@ -2,11 +2,14 @@ import unittest
 
 
 class GreenTestCase(unittest.TestCase):
-    def test_sum_list(self):
-        self.assertEqual(sum([1, 1, 1]), 3)
+    @staticmethod
+    def test_sum_list():
+        assert sum([1, 1, 1]) == 3, "1+1+1 equals 3"
 
-    def test_sum_tuple(self):
-        self.assertEqual(sum((1, 1, 1)), 3)
+    @staticmethod
+    def test_sum_tuple():
+        assert sum((1, 1, 1)) == 3, "1+1+1 equals 3"
 
-    def different_test(self):
-        self.assertEqual(sum((1, 1, 1)), 3)
+    @staticmethod
+    def different_naming_for_test():
+        assert sum((1, 2, 3)) == 6, "1+2+3 equals 6"

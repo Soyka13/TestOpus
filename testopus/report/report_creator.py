@@ -1,10 +1,10 @@
 from abc import ABC, abstractmethod
-from testopus.test_executor.tests_model import TOTestsModel
+from testopus.report.report_model import TOReportModel
 
 
 class ReportCreator(ABC):
     @abstractmethod
-    def __init__(self, model: TOTestsModel):
+    def __init__(self, model: TOReportModel):
         pass
 
     @abstractmethod

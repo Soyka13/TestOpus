@@ -2,17 +2,6 @@ import os
 from testopus.logger.logger import logger
 
 
-class NullWriter:
-    def write(self, *args, **kwargs):
-        pass
-
-    def writeln(self, *args, **kwargs):
-        pass
-
-    def flush(self, *args, **kwargs):
-        pass
-
-
 def dir_exists(path):
     exists = os.path.exists(path) and os.path.isdir(path)
 

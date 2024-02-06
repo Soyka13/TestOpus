@@ -1,13 +1,12 @@
 from testopus.config.config import Config
 from testopus.report.report_type import ReportType
-from testopus.test_executor.tests_model import TOTestsModel
+from testopus.report.report_model import TOReportModel
 from testopus.report.json_report_creator import JSONReportCreator
-from testopus.logger.logger import logger
 
 
 class TestReporter:
 
-    def __init__(self, config: Config, result: TOTestsModel):
+    def __init__(self, config: Config, result: TOReportModel):
         self.config = config
         self.report_creator = None
 

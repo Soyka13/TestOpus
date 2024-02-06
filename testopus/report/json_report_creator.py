@@ -2,15 +2,15 @@ import json
 import os
 from datetime import datetime
 
-from testopus.test_executor.tests_model import TOTestsModel
+from testopus.report.report_model import TOReportModel
 from testopus.report.report_creator import ReportCreator
 from testopus.logger.logger import logger
-from testopus.utils.utils import dir_exists, absolute_path
+from testopus.utils.utils import dir_exists
 
 
 class ReportJSONEncoder(json.JSONEncoder):
     def default(self, o):
-        if isinstance(o, TOTestsModel):
+        if isinstance(o, TOReportModel):
             return {"tests": [
                 {
                     "test": test.test_name,
@@ -26,7 +26,7 @@ class ReportJSONEncoder(json.JSONEncoder):
 
 class JSONReportCreator(ReportCreator):
 
-    def __init__(self, model: TOTestsModel):
+    def __init__(self, model: TOReportModel):
         self.model = model
 
     def get_formatted_report(self):
@@ -38,9 +38,9 @@ class JSONReportCreator(ReportCreator):
     def save(self, path=None):
         if path is None:
             current_directory = os.getcwd()
-            path = current_directory + '/reports/json/'
+            path = current_directory + '/reports/json'
 
-        full_path = absolute_path(path)
+        full_path = os.path.abspath(path)
 
         if not dir_exists(full_path):
             return
@@ -49,7 +49,7 @@ class JSONReportCreator(ReportCreator):
 
         file_name = f"Report-{datetime.now().strftime('%Y-%m-%d-%H:%M:%S')}.json"
 
-        report_path = full_path + file_name
+        report_path = full_path + '/' + file_name
 
         with open(report_path, 'w') as json_file:
             json_file.write(self.get_formatted_report())

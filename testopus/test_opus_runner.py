@@ -1,6 +1,7 @@
-from testopus.test_loader.loader import TestLoader
-from testopus.test_executor.executor import TestExecutor
-from testopus.test_reporter.reporter import TestReporter
+from testopus.loader.test_case_loader import TestCaseLoader
+from testopus.loader.test_loader import TestLoader
+from testopus.executor.executor import TestExecutor
+from testopus.reporter.reporter import TestReporter
 from testopus.config.config import Config
 
 
@@ -11,12 +12,10 @@ class TestOpusRunner:
 
     def run(self):
         # Load
-        loader = TestLoader(self.config)
+        loader = TestLoader(self.config, test_case_loader=TestCaseLoader(config=self.config))
         suit = loader.load()
 
         # Execute
-        if suit is None:
-            return
         executor = TestExecutor()
         result = executor.run(suit)
 

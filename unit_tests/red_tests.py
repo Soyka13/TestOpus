@@ -1,21 +1,23 @@
-import unittest
+from testopus.utils.decorators import skip, failure_expected
 
 
-class RedTestCase(unittest.TestCase):
-    def test_boolean(self):
-        self.assertEqual(True, False)
+class RedTestCase:
+    @staticmethod
+    def test_boolean():
+        x = True
+        y = False
+        assert x == y, "True is not False"
 
-    def test_sum(self):
-        self.assertEqual(2 + 2, 5)
+    @staticmethod
+    def test_sum():
+        assert 2+2 == 5, "2+2 should be 4"
 
-    @unittest.skip
-    def test_skipped(self):
+    @staticmethod
+    @skip
+    def test_skipped():
         raise Exception("This test should be skipped.")
 
-    @unittest.expectedFailure
-    def test_expected_failure(self):
+    @staticmethod
+    @failure_expected
+    def test_expected_failure():
         raise Exception("This test is expected to fail.")
-
-
-if __name__ == '__main__':
-    unittest.main()
