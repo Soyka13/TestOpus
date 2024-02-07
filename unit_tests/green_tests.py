@@ -1,7 +1,4 @@
-import unittest
-
-
-class GreenTestCase(unittest.TestCase):
+class GreenTestCase:
     @staticmethod
     def test_sum_list():
         assert sum([1, 1, 1]) == 3, "1+1+1 equals 3"
