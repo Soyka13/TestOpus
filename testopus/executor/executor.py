@@ -44,7 +44,6 @@ class TestExecutor:
         try:
             handler.start_test_run()
             func()
-            handler.add_success(test.get_description())
         except SkipException:
             handler.add_skip(test.get_description())
         except FailureExpectedException as err:
@@ -53,6 +52,8 @@ class TestExecutor:
             handler.add_expected_failure(test.get_description(), err)
         except Exception as err:
             handler.add_error(test.get_description(), err)
+        else:
+            handler.add_success(test.get_description())
 
     def __execute_obj_method(self, module: object, test: TOTest, handler: TOTestResultHandler):
         """
