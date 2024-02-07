@@ -5,7 +5,9 @@ from testopus.report.json_report_creator import JSONReportCreator
 
 
 class TestReporter:
-
+    """
+    Generates and manages test reports based on the provided configuration and result.
+    """
     def __init__(self, config: Config, result: TOReportModel):
         self.config = config
         self.report_creator = None
@@ -18,6 +20,9 @@ class TestReporter:
                 self.reportCreator = JSONReportCreator(result)
 
     def report(self):
+        """
+        Generates and manages the test report based on the configuration settings.
+        """
         if not self.config.should_report:
             return
 

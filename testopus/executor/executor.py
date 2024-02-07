@@ -4,14 +4,20 @@ import inspect
 from testopus.loader.module_loader import ModuleLoader
 from testopus.logger.logger import logger
 from testopus.loader.test_case_model import TOTestCase, TOTest
+from testopus.report.report_model import TOReportModel
 from testopus.executor.test_result import TOTestResultHandler
 from testopus.utils.skip_decorator import SkipException
 from testopus.utils.failure_expected_decorator import FailureExpectedException
 
 
 class TestExecutor:
-
-    def run(self, test_suit: [TOTestCase]):
+    """
+    Class responsible for executing test cases.
+    """
+    def run(self, test_suit: [TOTestCase]) -> TOReportModel:
+        """
+        Executes the provided test suite and returns the test report model.
+        """
         logger.info(f"Test execution started at {datetime.now()}.")
         handler = TOTestResultHandler()
 
@@ -29,7 +35,10 @@ class TestExecutor:
         return handler.get_report_model()
 
     @staticmethod
-    def __execute_func(obj, test: TOTest, handler: TOTestResultHandler):
+    def __execute_func(obj: object, test: TOTest, handler: TOTestResultHandler):
+        """
+        Executes a test function and handles its result.
+        """
         func = getattr(obj, test.name, None)
 
         try:
@@ -47,7 +56,10 @@ class TestExecutor:
 
         handler.add_success(test.get_description())
 
-    def __execute_obj_method(self, module, test: TOTest, handler):
+    def __execute_obj_method(self, module: object, test: TOTest, handler: TOTestResultHandler):
+        """
+        Creates an instance of a class and executes its test method.
+        """
         for _, obj in inspect.getmembers(module):
             if inspect.isclass(obj):
                 try:

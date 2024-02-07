@@ -12,6 +12,10 @@ class Colors(Enum):
 
 
 class DefaultFormatter(logging.Formatter):
+    """
+    Custom log formatter with default formatting and colorized output.
+    """
+
     LOG_COLORS = {
         'DEBUG': Colors.BLUE.value,
         'INFO': Colors.GREEN.value,
@@ -25,6 +29,9 @@ class DefaultFormatter(logging.Formatter):
                          datefmt='%Y-%m-%d %H:%M:%S')
 
     def format(self, record):
+        """
+        Formats the log record, applying color based on log level.
+        """
         log_message = super().format(record)
 
         log_level = record.levelname
@@ -35,6 +42,9 @@ class DefaultFormatter(logging.Formatter):
 
 
 class TOLogger(logging.Logger):
+    """
+    Custom logger with a default formatter.
+    """
     def __init__(self, name, level=logging.NOTSET, formatter=None):
         super().__init__(name, level)
 
@@ -46,4 +56,5 @@ class TOLogger(logging.Logger):
         self.addHandler(console_handler)
 
 
+# Global instance of a TOLogger
 logger = TOLogger('com.TestOpus.TOLogger')

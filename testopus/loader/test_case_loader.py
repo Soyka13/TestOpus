@@ -7,11 +7,16 @@ from testopus.utils.utils import dir_exists
 
 
 class TestCaseLoader:
-
+    """
+    Loads test case files based on configuration settings.
+    """
     def __init__(self, config: Config):
         self.config = config
 
-    def load(self):
+    def load(self) -> [str]:
+        """
+        Discovers and returns the paths of test case files based on the configuration.
+        """
         directory_path = Path(self.config.search_path).resolve()
         logger.info(f"Discovering test cases at {directory_path}/")
 
@@ -27,5 +32,8 @@ class TestCaseLoader:
         return matching_files
 
     @staticmethod
-    def __full_path(directory_path: Path, rule):
+    def __full_path(directory_path: Path, rule: str) -> Path:
+        """
+        Constructs the full path for a given rule within the specified directory path.
+        """
         return directory_path.joinpath('**', rule).absolute()

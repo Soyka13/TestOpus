@@ -9,6 +9,9 @@ from testopus.utils.utils import dir_exists
 
 
 class ReportJSONEncoder(json.JSONEncoder):
+    """
+    Custom JSON encoder for encoding TOReportModel objects.
+    """
     def default(self, o):
         if isinstance(o, TOReportModel):
             return {"tests": [
@@ -25,17 +28,28 @@ class ReportJSONEncoder(json.JSONEncoder):
 
 
 class JSONReportCreator(ReportCreator):
-
+    """
+    Creates JSON-formatted reports based on a TOReportModel.
+    """
     def __init__(self, model: TOReportModel):
         self.model = model
 
-    def get_formatted_report(self):
+    def get_formatted_report(self) -> str:
+        """
+        Returns the JSON-formatted report as a string.
+        """
         return json.dumps(self.model, cls=ReportJSONEncoder, indent=4)
 
     def display(self):
+        """
+        Logs the JSON-formatted report.
+        """
         logger.info(self.get_formatted_report())
 
-    def save(self, path=None):
+    def save(self, path: str = None):
+        """
+        Saves the JSON-formatted report to the specified path.
+        """
         if path is None:
             current_directory = Path.cwd()
             path = current_directory / '/reports' / 'json'
@@ -45,7 +59,7 @@ class JSONReportCreator(ReportCreator):
         if not dir_exists(full_path):
             return
 
-        logger.info(f"Saving report at {full_path}.")
+        logger.info(f"Saving report at {full_path}")
 
         file_name = f"Report-{datetime.now().strftime('%Y-%m-%d-%H:%M:%S')}.json"
 

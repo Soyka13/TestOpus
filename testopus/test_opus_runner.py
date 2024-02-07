@@ -6,6 +6,9 @@ from testopus.config.config import Config
 
 
 class TestOpusRunner:
+    """
+    Orchestrates the loading, execution and reporting of test cases.
+    """
 
     def __init__(self, config: Config):
         self.config = config
@@ -20,7 +23,5 @@ class TestOpusRunner:
         result = executor.run(suit)
 
         # Report
-        if result is None:
-            return
         reporter = TestReporter(self.config, result)
         reporter.report()

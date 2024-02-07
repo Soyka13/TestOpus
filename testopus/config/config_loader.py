@@ -1,13 +1,22 @@
 import json
 from testopus.config.config import Config
 from testopus.report.report_type import ReportType
+from testopus.logger.logger import logger
 
 _DEFAULT_CONFIG_PATH = "testopus/default_config.json"
 
 
 class ConfigLoader:
+    """
+    Loads configuration settings from a JSON file.
+    """
+
     @staticmethod
     def load(path=None):
+        """
+        Loads configuration settings from the specified JSON file path.
+        """
+
         if path is None:
             path = _DEFAULT_CONFIG_PATH
 
@@ -28,13 +37,13 @@ class ConfigLoader:
             return cfg
 
         except FileNotFoundError:
-            print(f"File not found: {path}")
+            logger.error(f"File not found: {path}")
             return None
 
         except json.JSONDecodeError:
-            print(f"Error decoding JSON in file: {path}")
+            logger.error(f"Error decoding JSON in file: {path}")
             return None
 
         except Exception as e:
-            print(f"An unexpected error occurred: {str(e)}")
+            logger.error(f"An unexpected error occurred: {str(e)}")
             return None
