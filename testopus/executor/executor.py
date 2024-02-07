@@ -7,7 +7,7 @@ from testopus.loader.test_case_model import TOTestCase, TOTest
 from testopus.report.report_model import TOReportModel
 from testopus.executor.test_result import TOTestResultHandler
 from testopus.utils.skip_decorator import SkipException
-from testopus.utils.failure_expected_decorator import FailureExpectedException
+from testopus.utils.failure_expected_decorator import FailureExpectedException, TestNotFailedException
 
 
 class TestExecutor:
@@ -48,6 +48,8 @@ class TestExecutor:
         except SkipException:
             handler.add_skip(test.get_description())
         except FailureExpectedException as err:
+            handler.add_expected_failure(test.get_description(), err)
+        except TestNotFailedException as err:
             handler.add_expected_failure(test.get_description(), err)
         except Exception as err:
             handler.add_error(test.get_description(), err)

@@ -22,3 +22,8 @@ class RedTestCase:
     @failure_expected
     def test_expected_failure():
         raise Exception("This test is expected to fail.")
+
+    @staticmethod
+    @failure_expected
+    def test_expected_failure_without_exception():
+        print("Exception was not raised.")
